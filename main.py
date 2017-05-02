@@ -5,7 +5,7 @@ import shutil
 
 class Car:
     def __init__(self):
-        self.features = re.compile('[a-z]+-+[0-9]+', flags=re.I)
+        self.features = re.compile('[a-z]+-[0-9]+', flags=re.I)
 
     def get_file(self):
 

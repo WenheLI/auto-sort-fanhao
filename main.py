@@ -33,10 +33,21 @@ class Car:
             os.mkdir(address_target)
         for file_name in os.listdir(address_source):
             if self.features.match(file_name):
-                if os.path.exists(address_target + '\\' + file_name[:file_name.find('-')]):
-                    shutil.move(file_name, address_target + '\\' + file_name[:file_name.find('-')])
+                if os.path.exists(address_target + '/' + file_name[:file_name.find('-')]):
+                    shutil.move(file_name, address_target + '/' + file_name[:file_name.find('-')])
                 else:
-                    os.mkdir(address_target + '\\' + file_name[:file_name.find('-')])
-                    shutil.move(file_name, address_target + '\\' + file_name[:file_name.find('-')])
+                    os.mkdir(address_target + '/' + file_name[:file_name.find('-')])
+                    shutil.move(file_name, address_target + '/' + file_name[:file_name.find('-')])
+        os.chdir(address_target)
+        dirs = os.walk(address_target)
+        for add, dir, files in dirs:
+            for one in dir:
+                for _add, _dir, file in os.walk(one):
+                    if len(file) <= 3:
+                        for name in file:
+                            shutil.move(_add + '/' + name, address_target)
+                        os.rmdir(_add)
+
+
 car = Car()
 car.get_file()
